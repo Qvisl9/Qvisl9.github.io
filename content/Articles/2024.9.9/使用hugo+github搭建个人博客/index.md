@@ -16,7 +16,7 @@ tags: ["hugo","github"]
 
 2.下载地址：[Git - Downloads (git-scm.com)](https://git-scm.com/downloads)鼠标右键显示Git Bash Here就表示安装Git成功了。
 
-<img src="img/git.png" alt="git" style="zoom: 80%;" />
+<img src="img/git.png" alt="git"  />
 
 3.设置本地git用户
 
@@ -40,7 +40,7 @@ tags: ["hugo","github"]
   ssh-keygen -t rsa -C "邮箱"
   ```
 
-<img src="img/gituser.png" alt="git用户" style="zoom:80%;" />
+<img src="img/gituser.png" alt="git用户"  />
 
  *将其中Your Name替换为用户名,邮箱替换为自己注册时的邮箱*
 
@@ -48,13 +48,13 @@ tags: ["hugo","github"]
 
 打开该目录下的**id_rsa.pub**文件，用记事本打开并复制这个密钥。
 
-<img src="img/pub.png" alt="pub" style="zoom:80%;" />
+<img src="img/pub.png" alt="pub"  />
 
 4.去GitHub上验证
 
 登录github ->进入设置->SSH and GPG key ->新建密钥，把上面文件里的内容全部复制粘贴进去即可。
 
-<img src="img/github1.png" alt="user1" style="zoom:80%;" />
+<img src="img/github1.png" alt="user1"  />
 
 在Git Bash里输入`ssh -T git@github.com` ，成功的话会出现
 
@@ -76,7 +76,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.We
 choco
 ```
 
-<img src="img/choco.png" alt="choco" style="zoom:80%;" />
+<img src="img/choco.png" alt="choco"  />
 
 ### 三.安装hugo
 
@@ -92,7 +92,7 @@ choco install hugo -confirm
 hugo version
 ```
 
-<img src="img/hugo.png" alt="hugo" style="zoom:80%;" />
+<img src="img/hugo.png" alt="hugo"  />
 
 ### 四.安装Typora
 
