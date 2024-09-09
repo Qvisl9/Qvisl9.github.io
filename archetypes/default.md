@@ -4,4 +4,9 @@ date: {{ .Date }}
 author: "Suika"
 description: ""
 tags: []
+lastmod: ""
 ---
+
+{{< lead >}}
+
+{{< /lead >}}

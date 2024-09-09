@@ -11,7 +11,9 @@ tags: ["hugo","github"]
 ### 一.安装git
 
 以win10为例
+
 1.注册git账号：https://github.com/并记住用户名和密码
+
 2.下载地址：[Git - Downloads (git-scm.com)](https://git-scm.com/downloads)鼠标右键显示Git Bash Here就表示安装Git成功了。
 
 <img src="img/git.png" alt="git" style="zoom: 80%;" />
