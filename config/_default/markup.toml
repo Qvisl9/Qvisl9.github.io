@@ -1,0 +1,19 @@
+# -- Markup --
+# These settings are required for the theme to function.
+
+[goldmark]
+[goldmark.renderer]
+  unsafe = true
+
+[highlight]
+  codeFences = true
+  guessSyntax = true
+  lineNos = false
+  lineNumbersInTable = true
+  lineNoStart = 1
+  tabWidth = 2
+  noClasses = false
+
+[tableOfContents]
+  startLevel = 2
+  endLevel = 4
