@@ -131,21 +131,9 @@ smartTOCHideUnfocusedChildren = false
 
 [fathomAnalytics]
   # site = "ABC12345"
-  # domain = "llama.yoursite.com"
+# domain = "llama.yoursite.com"
 
-[umamiAnalytics]
-  # websiteid = "ABC12345"
-  # domain = "llama.yoursite.com"
-
-[buymeacoffee]
-  identifier = "kadama"
-  globalWidget = true
-  globalWidgetMessage = ""
-  globalWidgetColor = "#FF813F"
-  globalWidgetPosition = "Right"
-
-[verification]
   # google = ""
   bing = "0A7DB745614C0E9287286DF83DF2128B"
   # pinterest = ""
-  # yandex = ""
+# yandex = ""
