@@ -17,7 +17,6 @@ title = "小熊猫站起来"
   headline = "真的猛兽，以站立的姿态走行世间"
   bio = "反者道之动"
   links = [
-    { github = "https://github.com/Qvisl9/Qvisl9.github.io" },
     { envelope = "mailto:milkyway7847@gmail.com" },
     { bars = "/about" },
   ]

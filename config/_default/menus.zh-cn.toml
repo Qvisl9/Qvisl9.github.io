@@ -16,25 +16,22 @@
   weight = 10
 
 [[main]]
-  name = "图床"
-  url = "https://image.jeoqm-77.top/"
+  name = "标签"
+  pageRef = "tags"
   weight = 20
+
+[[main]]
+   name = "关于"
+   pageRef = "about"
+   weight = 30
 
 [[main]]
   name = "探针"
   url = "https://zt.jeoqm-77.top"
-  weight = 30
+  weight = 40
 
 # -- Footer Menu --
 # The footer menu is displayed at the bottom of the page, just before
 # the copyright notice. Configure as per the main menu above.
 
-  [[footer]]
-   name = "标签"
-   pageRef = "tags"
-   weight = 10
 
- [[footer]]
-   name = "关于"
-   pageRef = "about"
-   weight = 20
