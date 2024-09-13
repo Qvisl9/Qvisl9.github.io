@@ -1,11 +1,9 @@
 ---
-​---
 title: "{{ replace .Name "-" " " | title }}"
 date: {{ .Date }}
-author: "Suika"
+author: "何物"
 description: ""
 tags: []
-​---
 ---
 
 {{< lead >}}
