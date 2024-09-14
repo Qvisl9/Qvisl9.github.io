@@ -18,25 +18,25 @@ tags: ["图床"]
 
 2、左侧菜单选择`R2`，用信用卡或者是PayPal认证，建议是用PayPal，中国区也可以，没有的可以先去注册个Paypal
 
-3、创建存储桶，名称：imgdisk
+3、创建存储桶，名称：img
 
-![imgdisk](https://8b324ae.webp.li/Snipaste_2024-09-13_17-14-58.png)
+![Snipaste_2024-09-13_17-14-58](C:\IS\Blog\Bearcat\content\Articles\2024.9.13\CloudFlare-R2图床搭建教程，可能是目前最完美的解决方案！\img\Snipaste_2024-09-13_17-14-58.png)选择中间的`setting`
 
-选择中间的`setting`
-
-![Snipaste_2024-09-13_19-31-20](https://8b324ae.webp.li/Snipaste_2024-09-13_19-31-20.png)
+![Snipaste_2024-09-13_19-31-20](https://ab712dd.webp.li/Snipaste_2024-09-13_19-31-20.png)
 
 打开子域并设置自定义域名(自定义域名要已经解析到cf上)
 
-![Snipaste_2024-09-13_17-18-02](https://8b324ae.webp.li/Snipaste_2024-09-13_17-18-02.png)
+![Snipaste_2024-09-13_17-18-02](https://ab712dd.webp.li/Snipaste_2024-09-13_17-18-02.png)
 
 4、由天300M以上要用s3 API，所以现在去申请API
 
-选择`管理R2 API令牌`![Snipaste_2024-09-13_17-19-33](https://8b324ae.webp.li/Snipaste_2024-09-13_17-19-33.png)
+选择`管理R2 API令牌`
 
-令牌名称随意，权限设置`对象读和写`，指定存储桶为刚才创建的，也就是`imgdisk`
+![Snipaste_2024-09-13_17-19-33](https://ab712dd.webp.li/Snipaste_2024-09-13_17-19-33.png)
 
-![Snipaste_2024-09-13_17-20-05](https://8b324ae.webp.li/Snipaste_2024-09-13_17-20-05.png)
+令牌名称随意，权限设置`对象读和写`，指定存储桶为刚才创建的，也就是``img`
+
+![Snipaste_2024-09-13_17-20-05](https://ab712dd.webp.li/Snipaste_2024-09-13_17-20-05.png)
 
 这样我们R2图床就已经搭建好了。现在用PIcGo搭建上传。
 
@@ -44,7 +44,7 @@ tags: ["图床"]
 
 打开PIcGO，选择插件管理安装`s3`
 
-![](https://8b324ae.webp.li/Snipaste_2024-09-13_17-28-23.png)
+![Snipaste_2024-09-13_17-28-23](https://ab712dd.webp.li/Snipaste_2024-09-13_17-28-23.png)
 
 安装好后，打开图床设置，选择`Amazon s3`
 
@@ -54,7 +54,7 @@ tags: ["图床"]
 
 自定义节点：终结点
 
-![Snipaste_2024-09-13_17-34-51](https://8b324ae.webp.li/Snipaste_2024-09-13_17-34-51.png)
+![Snipaste_2024-09-13_17-34-51](https://ab712dd.webp.li/Snipaste_2024-09-13_17-34-51.png)
 
 ## 使用WebP加速图片缓存
 
@@ -62,10 +62,10 @@ tags: ["图床"]
 
 右下角`创建代理`
 
-![Snipaste_2024-09-13_19-51-11](https://8b324ae.webp.li/Snipaste_2024-09-13_19-51-11.png)
+![Snipaste_2024-09-13_19-51-11](https://ab712dd.webp.li/Snipaste_2024-09-13_19-51-11.png)
 
 代理名称随意，源站地址为R2的自定义域名，开头要加`https`确认即可
 
-![Snipaste_2024-09-13_19-52-32](https://8b324ae.webp.li/Snipaste_2024-09-13_19-52-32.png)
+![Snipaste_2024-09-13_19-52-32](https://ab712dd.webp.li/Snipaste_2024-09-13_19-52-32.png)
 
 之后再找开PicGo，在`Amazon S3`设置中，把自定义域名改为WeBP的代理地址即可。
