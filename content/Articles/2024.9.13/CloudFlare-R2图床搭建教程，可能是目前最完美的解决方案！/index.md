@@ -18,9 +18,11 @@ tags: ["图床"]
 
 2、左侧菜单选择`R2`，用信用卡或者是PayPal认证，建议是用PayPal，中国区也可以，没有的可以先去注册个Paypal
 
-3、创建存储桶，名称：img
+3、创建存储桶，名称：img，地区选择`美西`
 
-![Snipaste_2024-09-13_17-14-58](C:\IS\Blog\Bearcat\content\Articles\2024.9.13\CloudFlare-R2图床搭建教程，可能是目前最完美的解决方案！\img\Snipaste_2024-09-13_17-14-58.png)选择中间的`setting`
+![Snipaste_2024-09-13_17-14-58](https://ab712dd.webp.li/Snipaste_2024-09-13_17-14-58.png)
+
+选择中间的`setting`
 
 ![Snipaste_2024-09-13_19-31-20](https://ab712dd.webp.li/Snipaste_2024-09-13_19-31-20.png)
 
