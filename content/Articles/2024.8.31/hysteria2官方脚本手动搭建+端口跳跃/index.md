@@ -27,7 +27,7 @@ nano /etc/hysteria/config.yaml
 清空文件内容，将下列命令粘贴进去保存
 
 ```
-listen: :监听端口
+listen: :59346
 
 acme:
   domains:
@@ -41,7 +41,7 @@ auth:
 masquerade:
   type: proxy
   proxy:
-    url: sni域名
+    url: sni邮箱
     rewriteHost: true
 
 ignoreClientBandwidth: false 
@@ -63,10 +63,12 @@ outbounds:
   - name: hoho
     type: direct
     direct:
-      mode: 64  #开启ipv6优先
+      mode: auto   #64:ipv6优先
 ```
 
 ## 4、设置端口跳跃
+
+注意：网卡名称eth0要根据vps具体情况更改，可用命令`ip a`查看网卡名称！
 
 ```
 apt install iptables-persistent
