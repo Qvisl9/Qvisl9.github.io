@@ -162,3 +162,49 @@ $ git add .
 $ git commit -m '[描述信息]'
 $ git push origin
 ```
+
+## **Cloudflare Pages 配置博客**
+
+### 新建 Pages
+
+登录 cloudflare，点击左侧的`Workers和Pages`，选择`Pages`——连接到 Git
+
+![md_img202311081549200](https://ab712dd.webp.li/md_img202311081549200.png)
+
+允许 cloudflare 访问 blog 仓库，选择这个仓库开始设置。
+
+![md_img202311081550760](https://ab712dd.webp.li/md_img202311081550760.png)
+
+### 设置构建环境
+
+- 项目名称：随便写，之后会分配给你一个`[项目名称].pages.dev`。我这里就是 `leev.pages.dev`
+- 生产分支：一般默认选择 main
+- 框架预设：hugo
+- 环境变量
+
+- 设置 hugo 版本，设置成当前最新版本。我这里是：HUGO_VERSION=0.120.3
+- 开启 hugo 扩展功能，extend=true![md_img202311081553496](https://ab712dd.webp.li/md_img202311081553496.png)
+
+### 部署成功
+
+通过`[项目名称].pages.dev`访问站点![md_img202311081556682](https://ab712dd.webp.li/md_img202311081556682.png)
+
+## 设置域名
+
+### 首先自行添加个人域名
+
+![md_img202311081559407](https://ab712dd.webp.li/md_img202311081559407.png)
+
+### 绑定域名
+
+- 进入构建好的 Pages![md_img202311081600461](https://ab712dd.webp.li/md_img202311081600461.png)
+
+- 自定义域——设置自定义域![202408202330986](https://ab712dd.webp.li/202408202330986.png)
+
+- 添加自定义域。可以设置一级或二级域名，这里我直接用了一级域名![md_img202311081602294](https://ab712dd.webp.li/md_img202311081602294.png)
+
+![md_img202311081603622](https://ab712dd.webp.li/md_img202311081603622.png)
+
+然后进入 Pages，绑定域名
+
+- 等待片刻，DNS 解析生效![md_img202311081604721](https://ab712dd.webp.li/md_img202311081604721.png)
