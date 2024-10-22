@@ -56,7 +56,7 @@
 
   const myTimeline = new MastodonTimeline.Init({
     mtContainerId: "mt-container",
-    instanceUrl: "https://blog.jeoqm-77.top",
+    instanceUrl: "https://md.jeoqm-77.top",
     timelineType: "profile",
     userId: "113350327236825240",
     profileName: "@Wission",
@@ -110,6 +110,9 @@
   const mtBody = document.querySelector('.mt-body');
   observer.observe(mtBody, { childList: true, subtree: true });
 </script>
+
+<!-- CDN 方式 -->
+<script src="https://cdn.jsdelivr.net/npm/@idotj/mastodon-embed-timeline@4.4.2/dist/mastodon-timeline.umd.js" integrity="sha256-E6WPG6iq+qQIzvu3HPJJxoAeRdum5siq13x4ITjyxu8=" crossorigin="anonymous"></script>
 
 <noscript>
   Please enable JavaScript to view the Mastodon Timeline powered by <a href="https://gitlab.com/idotj/mastodon-embed-timeline" target="_blank">Mastodon embed timeline widget</a>.
