@@ -1,5 +1,5 @@
 ---
-title: "嘀咕"
+title: "碎碎念"
 layout: "mastodon"
 type: "sample"
 showDate: false
@@ -26,5 +26,10 @@ aliases:
     - /toot
 ---
 
-我从接触独立博客开始不久，就一直在博客中部署了一个类似「**嘀咕**」（Whisper）的微博客子栏目。主要是区别于博客长文的自言自语，「保卫表达欲」。最初的作用是备份 QQ 说说、Twitter 和微博等。信息流来自 [{{< icon "mastodon" >}} Mastodon ，工具：[{{< icon "gitlab" >}} Mastodon embed timeline](https://gitlab.com/idotj/mastodon-embed-timeline) 。
+**小熊猫也有表达欲爆表的时候，但更多的时候是自言自语**
 
+<div id="mt-containner" class="mt-container">
+    <div class="mt-body" role="feed">
+    <div class="mt-loading-spinner"></div>
+    </div>
+</div>

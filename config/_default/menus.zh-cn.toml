@@ -19,7 +19,7 @@
   weight = 10
 
 [[main]]
-  name = "嘀咕"
+  name = "碎碎念"
   pageRef = "mastodon"
   weight = 11
 

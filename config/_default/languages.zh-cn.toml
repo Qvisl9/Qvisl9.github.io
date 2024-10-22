@@ -12,7 +12,7 @@ title = "小熊猫站起来"
   copyright = "© { year } <span class='inline-block'> 吃芒果的小熊猫 </span> All Rights Reserved</span>."
 
 [params.author]
-  name = "何物"
+  name = "Wission"
   image = "img/bear-cat-logo.png"
   headline = "真的猛兽，以站立的姿态走行世间"
   bio = "反者道之动"

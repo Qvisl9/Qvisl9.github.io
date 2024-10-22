@@ -1,0 +1,118 @@
+{{ define "main" }}
+{{ .Scratch.Set "scope" "single" }}
+
+<!-- 引入 Mastodon 时间线 CSS -->
+{{ $mastodonCss := resources.Get "lib/mastodon-embed-timeline/dist/mastodon-timeline.min.css" | minify | fingerprint "sha256" }}
+<link rel="stylesheet" href="{{ $mastodonCss.RelPermalink }}" integrity="{{ $mastodonCss.Data.Integrity }}" crossorigin="anonymous">
+
+<!-- 引入自定义 CSS，确保文件存在并能正确处理 -->
+{{ $mastodonCustomCss := resources.Get "css/mastodon-timeline-custom.scss" | toCSS | minify | fingerprint "sha256" }}
+{{ if not $mastodonCustomCss }}<p>Custom CSS not found</p>{{ end }}
+<link rel="stylesheet" href="{{ $mastodonCustomCss.RelPermalink }}" integrity="{{ $mastodonCustomCss.Data.Integrity }}" crossorigin="anonymous">
+
+<article>
+  {{ if .Params.showHero | default (.Site.Params.article.showHero | default false) }}
+    {{ $heroStyle := .Params.heroStyle }}
+    {{ if not $heroStyle }}{{ $heroStyle = .Site.Params.article.heroStyle }}{{ end }}
+    {{ $heroStyle := print "partials/hero/" $heroStyle ".html" }}
+    {{ if templates.Exists $heroStyle }}
+      {{ partial $heroStyle . }}
+    {{ else }}
+      {{ partial "partials/hero/basic.html" . }}
+    {{ end }}
+  {{ end }}
+
+  <header id="single_header" class="mt-5 max-w-prose">
+    {{ if .Params.showBreadcrumbs | default (.Site.Params.article.showBreadcrumbs | default false) }}
+      {{ partial "breadcrumbs.html" . }}
+    {{ end }}
+    <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
+      {{ .Title }}
+    </h1>
+    <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
+      {{ partial "article-meta/basic.html" (dict "context" . "scope" "single") }}
+    </div>
+  </header>
+
+  <section class="flex flex-col max-w-full mt-0 prose dark:prose-invert lg:flex-row">
+    <div class="min-w-0 min-h-0 max-w-fit">
+      <div class="article-content max-w-full mb-20">
+        {{ .Content }}
+        <div id="mt-container" class="mt-container">
+          <div class="mt-body" role="feed">
+            <div class="mt-loading-spinner"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</article>
+
+<!-- 引入 Mastodon 时间线 JavaScript -->
+{{ $js := resources.Get "lib/mastodon-embed-timeline/dist/mastodon-timeline.esm.js" }}
+
+<script type="module">
+  import * as MastodonTimeline from '{{ $js.RelPermalink }}';
+
+  const myTimeline = new MastodonTimeline.Init({
+    mtContainerId: "mt-container",
+    instanceUrl: "https://blog.jeoqm-77.top",
+    timelineType: "profile",
+    userId: "113350327236825240",
+    profileName: "@Wission",
+    spinnerClass: "mt-loading-spinner",
+    defaultTheme: "auto",
+    maxNbPostFetch: "40",
+    maxNbPostShow: "20",
+    dateLocale: "en-US",
+    dateOptions: {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    },
+    hideUnlisted: true,
+    hideReplies: true,
+    hidePinnedPosts: true,
+    hideUserAccount: false,
+    txtMaxLines: "",
+    btnShowMore: "SHOW MORE",
+    btnShowLess: "SHOW LESS",
+    hideVideoPreview: true,
+    hidePreviewLink: true,
+    previewMaxLines: "",
+    hideCounterBar: false,
+    disableCarousel: false,
+    btnSeeMore: "See more posts at e5n.cc",
+    btnReload: "Refresh",
+    insistSearchContainer: true,
+    insistSearchContainerTime: "3000",
+  });
+</script>
+
+<script>
+  const observer = new MutationObserver(() => {
+    const links = document.querySelectorAll('.mt-post-txt a');
+
+    links.forEach(link => {
+      const href = link.getAttribute('href');
+      const excludedDomains = ['md.jeoqm-77.tp', 'blog.jeoqm-77.top'];
+      const domain = new URL(href).hostname;
+      if (excludedDomains.includes(domain)) {
+        return;
+      }
+
+      const encodedHref = btoa(encodeURIComponent(href));
+      const newHref = 'https://blog.jeoqm-77.top/go/?target=' + encodedHref;
+      link.setAttribute('href', newHref);
+    });
+  });
+
+  const mtBody = document.querySelector('.mt-body');
+  observer.observe(mtBody, { childList: true, subtree: true });
+</script>
+
+<noscript>
+  Please enable JavaScript to view the Mastodon Timeline powered by <a href="https://gitlab.com/idotj/mastodon-embed-timeline" target="_blank">Mastodon embed timeline widget</a>.
+</noscript>
+
+{{- end -}}
