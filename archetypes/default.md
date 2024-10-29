@@ -1,9 +1,11 @@
 ---
 title: "{{ replace .Name "-" " " | title }}"
 date: {{ .Date }}
-author: "何物"
+author: "Wission"
 description: ""
-tags: []
+tags:
+  - 示例标签
+series: ["系列名称"]
 lastmod: ""
 ---
 
