@@ -360,3 +360,19 @@ docker-compose run --rm web bin/tootctl search deploy
 ```
 
 建立之前嘟文的搜索索引即可。
+
+## 相关命令
+
+查询账户
+
+```
+docker exec mastodon_web_1 tootctl accounts
+```
+
+查询用户ID
+
+```
+docker exec -it mastodon_db_1 psql -U mastodon -d mastodon
+SELECT id, username FROM accounts WHERE username = '用户名';
+```
+
