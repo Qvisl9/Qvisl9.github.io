@@ -41,7 +41,7 @@ auth:
 masquerade:
   type: proxy
   proxy:
-    url: sni邮箱
+    url: sni邮箱   #http://xxxx
     rewriteHost: true
 
 ignoreClientBandwidth: false 
