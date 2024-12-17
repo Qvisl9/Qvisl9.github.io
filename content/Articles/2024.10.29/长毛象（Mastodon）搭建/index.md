@@ -361,6 +361,16 @@ docker-compose run --rm web bin/tootctl search deploy
 
 建立之前嘟文的搜索索引即可。
 
+## Docker不掉线更新
+
+如：Mastodon 的 Prod 环境的例常升级
+
+- 修改 compose.yml 文件中的镜像标签为最新的，如果是默认的 latest 标签则不用管；
+
+- docker compose pull 拉取新镜像；
+
+- docker compose up -d --force-recreate ，用 forece recreate 则不需要 down 直接重新创建新镜像的容器了。
+
 ## 相关命令
 
 查询账户
@@ -374,5 +384,11 @@ docker exec mastodon_web_1 tootctl accounts
 ```
 docker exec -it mastodon_db_1 psql -U mastodon -d mastodon
 SELECT id, username FROM accounts WHERE username = '用户名';
+```
+
+强制刷新
+
+```
+docker-compose run --rm web tootctl accounts refresh --all --verbose
 ```
 
