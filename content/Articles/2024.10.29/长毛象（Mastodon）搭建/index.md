@@ -6,6 +6,7 @@ description: ""
 tags:
   - Mastodon
 series: ["Mastodon"]
+series_order: 1
 lastmod: ""
 ---
 

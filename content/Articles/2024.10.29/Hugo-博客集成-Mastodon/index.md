@@ -7,6 +7,7 @@ tags:
   - Mastodon
   - Hugo
 series: ["Mastodon"]
+series_order: 2
 lastmod: ""
 ---
 

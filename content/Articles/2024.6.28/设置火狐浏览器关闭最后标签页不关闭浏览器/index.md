@@ -4,6 +4,7 @@ date = 2024-06-28T21:42:57+08:00
 tags = ["火狐"]
 showSummary = true
 summary = "这是我喜欢火狐的一个原因"
+showAuthor=true
 
 +++
 

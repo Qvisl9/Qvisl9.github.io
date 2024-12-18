@@ -6,6 +6,7 @@ description: ""
 tags:
   - Uptime Kuma
 lastmod: ""
+showAuthor: true
 ---
 
 {{< lead >}}
