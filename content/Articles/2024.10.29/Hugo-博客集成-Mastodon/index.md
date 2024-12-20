@@ -19,13 +19,6 @@ lastmod: ""
 
 [原博文链接](https://www.eallion.com/mastodon-sync-to-memos/)
 
-### 前言
-
-我的博客子栏目「[嘀咕](https://www.eallion.com/mastodon/)」这个微博客（说说、自言自语），几经变迁，现在进化到了集成 Mastodon 时间线。可以把发布在联邦宇宙中的嘟文集成到博客中来。
-应邀写一篇博客整理一下实现过程。
-
-PS：`Mastodon` 是一个专有名词，像 `Iphone` `mAcOs` 一样，别写错了，很尬。
-
 ### 选型
 
 - API or RSS
@@ -140,6 +133,10 @@ git submodule add https://github.com/eallion/mastodon-embed-timeline.git assets/
 
 		// 你在 Mastodon 实例上的用户 ID 号
 		// 如果你没有选择 'profile' 作为时间线类型，请留空
+        // ID查询
+        // cd /home/mastodon/mastodon/
+        // docker exec -it mastodon_db_1 psql -U mastodon -d mastodon
+        // SELECT id, username FROM accounts WHERE username = '用户名';
 		userId: "107666",
 
 		// 你在 Mastodon 实例上的用户名（包括开头的 @ 符号）

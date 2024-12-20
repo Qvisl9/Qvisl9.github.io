@@ -189,7 +189,11 @@ certbot renew --dry-run
 
 ## 启动Mastodon
 
-cd `/home/mastodon/mastodon`文件夹，运行
+```
+cd /home/mastodon/mastodon
+```
+
+运行
 
 ```
 docker-compose down

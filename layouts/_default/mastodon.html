@@ -56,10 +56,10 @@
 
   const myTimeline = new MastodonTimeline.Init({
     mtContainerId: "mt-container",
-    instanceUrl: "https://md.jeoqm-77.top",
+    instanceUrl: "https://y32h.de",
     timelineType: "profile",
-    userId: "113390363284323920",
-    profileName: "@Wission",
+    userId: "113686436819877544",
+    profileName: "@Yann",
     spinnerClass: "mt-loading-spinner",
     defaultTheme: "auto",
     maxNbPostFetch: "40",
@@ -82,7 +82,7 @@
     previewMaxLines: "",
     hideCounterBar: false,
     disableCarousel: false,
-    btnSeeMore: "See more posts at md.jeoqm-77.top",
+    btnSeeMore: "See more posts at y32h.de",
     btnReload: "Refresh",
     insistSearchContainer: true,
     insistSearchContainerTime: "3000",
@@ -95,7 +95,7 @@
 
     links.forEach(link => {
       const href = link.getAttribute('href');
-      const excludedDomains = ['md.jeoqm-77.tp', 'blog.jeoqm-77.top'];
+      const excludedDomains = ['y32h.de', 'blog.jeoqm-77.top'];
       const domain = new URL(href).hostname;
       if (excludedDomains.includes(domain)) {
         return;

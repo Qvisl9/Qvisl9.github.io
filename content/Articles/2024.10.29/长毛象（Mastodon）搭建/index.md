@@ -7,7 +7,6 @@ tags:
   - Mastodon
 series: ["Mastodon"]
 series_order: 1
-lastmod: ""
 ---
 
 {{< lead >}}
@@ -25,7 +24,7 @@ lastmod: ""
 ## 安装常用命令
 
 ```
-apt update && apt install wget rsync python git curl vim git ufw sudo -y
+apt update && apt install wget rsync git curl vim git ufw sudo -y
 ```
 
 ## 创建 SWAP 分区
@@ -259,7 +258,9 @@ sudo apt install nginx -y
 nano /etc/nginx/sites-available/你的域名
 ```
 
-网页打开[nginx模板](https://raw.githubusercontent.com/mastodon/mastodon/main/dist/nginx.conf)，将其中的example.com替换成自己域名，将28和56行的`/home/mastodon/live/public`改成`/home/mastodon/mastodon/public`，**更新：**并将`try_files $uri =404;`修改为`try_files $uri @proxy;`，复制到服务器中保存。
+网页打开[nginx模板](https://raw.githubusercontent.com/mastodon/mastodon/main/dist/nginx.conf)，将其中的example.com替换成自己域名，将28和56行的`/home/mastodon/live/public`改成`/home/mastodon/mastodon/public`，
+
+**更新：**并将所有的`try_files $uri =404;`修改为`try_files $uri @proxy;`，复制到服务器中保存。
 
 随后配置镜像文件
 
