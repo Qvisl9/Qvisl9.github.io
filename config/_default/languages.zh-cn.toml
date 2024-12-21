@@ -8,7 +8,7 @@ title = "Don't Lose Hope"
   isoCode = "zh-cn"
   rtl = false
   dateFormat = "2006-01-02"
-  image = "img/logo.png"
+  logo = "img/logo.png"
   copyright = "© { year } <span class='inline-block'> Don't Lose Hope </span> All Rights Reserved</span>."
 
 [params.author]
