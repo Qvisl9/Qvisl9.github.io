@@ -14,7 +14,7 @@ title = "Don't Lose Hope"
 [params.author]
   name = "Yann Howard"
   image = "img/bear-cat-logo.png"
-  headline = "一步二步三步慢慢走"
+  headline = "真的猛兽，以站立的姿态走行世间"
   bio = "真的就这么晚，急不来"
   links = [
     { envelope = "mailto:milkyway7847@gmail.com" },
