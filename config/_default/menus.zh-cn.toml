@@ -19,24 +19,35 @@
   weight = 10
 
 [[main]]
-  name = "碎碎念"
-  pageRef = "mastodon"
-  weight = 11
+  name = "随想"
+  pageRef = "thoughts"
+  weight = 20
 
 [[main]]
-  name = "标签"
-  pageRef = "tags"
-  weight = 20
+  name = "碎碎念"
+  pageRef = "mastodon"
+  weight = 30
 
 [[main]]
    name = "关于"
    pageRef = "about"
-   weight = 30
+   weight = 40
+
+[[main]]
+   name = "更多"
+   weight = 50
+
+[[main]]
+  name = "标签"
+  parent = "更多"
+  pageRef = "tags"
+  weight = 52
 
 [[main]]
   name = "探针"
+  parent = "更多"
   url = "https://tz.jeoqm-77.top"
-  weight = 40
+  weight = 51
 
 # -- Footer Menu --
 # The footer menu is displayed at the bottom of the page, just before
