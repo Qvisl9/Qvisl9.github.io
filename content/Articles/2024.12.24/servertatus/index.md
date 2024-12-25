@@ -40,32 +40,53 @@ sudo chmod +x /usr/local/bin/docker-compose
 
 ### 修改配置文件
 
-下载两个配置文件 `serverstatus-config.json` `serverstatus-monthtraffic` 
+- 创建工作目录：
 
 ```
-wget --no-check-certificate -qO ~/serverstatus-config.json https://raw.githubusercontent.com/cppla/ServerStatus/master/server/config.json && mkdir ~/serverstatus-monthtraffic
+mkdir ~/serverstatus && cd ~/serverstatus
 ```
 
-下载完后选择性修改 `serverstatus-config.json` 文件
-
-> 建议host不填或不要填真实IP，因为host中的内容会暴露在前端json文件
-
-### docker run 启动服务端
-
-docker安装无法修改默认界面，如需修改默认界面请选择手动安装
-
-> `:` 之前是代表vps外部文件地址/端口 `:` 之后是容器内的文件地址/端口
->
-> 不用担心多个容器端口冲突问题，docker默认为每个容器分配不同的内网IP段
+- 下载默认配置文件：
 
 ```
-docker run -d --restart=always --name=serverstatus -v ~/serverstatus-config.json:/ServerStatus/server/config.json -v ~/serverstatus-monthtraffic:/usr/share/nginx/html/json -p 80:80 -p 35601:35601 cppla/serverstatus:latest
+wget --no-check-certificate -qO config.json https://raw.githubusercontent.com/cppla/ServerStatus/master/server/config.json
 ```
 
-#如果80和35601端口被占用了，就用的8880和45601端口，文件地址不变，例如启动命令为
+创建 `docker-compose.yml` 文件：
 
 ```
-docker run -d --restart=always --name=serverstatus -v ~/serverstatus-config.json:/ServerStatus/server/config.json -v ~/serverstatus-monthtraffic:/usr/share/nginx/html/json -p 8880:80 -p 45601:35601 cppla/serverstatus:latest
+nano docker-compose.yml
+```
+
+在文件中填入以下内容：
+
+```
+version: '3.8'
+
+services:
+  serverstatus:
+    image: cppla/serverstatus:latest
+    container_name: serverstatus
+    restart: always
+    ports:
+      - "8880:80"          # HTTP 服务端口
+      - "35601:35601"    # 探针通信端口
+    volumes:
+      - ./config.json:/ServerStatus/server/config.json  # 配置文件挂载
+      - ./monthtraffic:/usr/share/nginx/html/json       # 存储月流量数据
+
+```
+
+启动服务
+
+```
+docker-compose up -d
+```
+
+如果需要修改 `config.json` 文件重启容器使更改生效：
+
+```
+docker-compose restart
 ```
 
 通过 `http://ip:port` 访问
@@ -131,11 +152,11 @@ wget --no-check-certificate -qO client-linux.py 'https://raw.githubusercontent.c
 #以下是我修改的配置文件
 
 ```
-SERVER = "143.198.119.164"	#客户端服务器IP
+SERVER = "143.198.119.164"	#服务端服务器IP
 USER = "s01"			#填入服务端配置文件中的username
 
 PASSWORD = "USER_DEFAULT_PASSWORD"		#填入服务端配置文件中的password
-PORT = 45601							#填入客户端的外部端口，我的是45601
+PORT = 35601							#填入客户端的外部端口，我的是45601
 CU = "mall.10010.com"					#tcping的目标地址，建议跟我一样
 CT = "www.189.cn"						#tcping的目标地址，建议跟我一样
 CM = "www.bj.10086.cn"					#tcping的目标地址，建议跟我一样
@@ -154,14 +175,14 @@ apt install python3 -y
 - 为客户端程序配置守护进程systemd
 
 ```
-nano /etc/systemd/system/tzstatus.service
+nano /etc/systemd/system/serverstatus-client.service
 ```
 
 写入：
 
 ```
 [Unit]
-Description=serverstatus
+Description=serverstatus Client
 After=network.target
      
 [Service]
@@ -172,47 +193,34 @@ Restart=always
 WantedBy=multi-user.target
 ```
 
-## 相关命令
+- 重新加载 Systemd 配置
 
-- Docker重启容器
-
-```
-docker restart serverstatus
-```
-
-- systemd基础命令
-
-停止tzstatus服务
+保存并关闭文件后，运行以下命令重新加载 `systemd` 配置：
 
 ```
-systemctl stop tzstatus
+sudo systemctl daemon-reload
 ```
 
-启动tzstatus服务
+启动服务并设置开机自启
 
 ```
-systemctl start tzstatus
+sudo systemctl start serverstatus-client    # 启动客户端
+sudo systemctl enable serverstatus-client   # 设置开机启动
 ```
 
-查看tzstatus服务状态
+停止探针服务
 
 ```
-systemctl status tzstatus
+sudo systemctl stop serverstatus-client
 ```
 
-​	使tzstatus服务开机自启
+重启服务
 
 ```
-systemctl enable tzstatus
+sudo systemctl restart serverstatus-client
 ```
 
-​	关闭tzstatus开机自启	
 
-```
-systemctl disable tzstatus
-```
-
-​		
 
 ## 报警推送
 
@@ -283,7 +291,7 @@ systemctl disable tzstatus
 			}
 		]
 	}       
-	
+
 }       
 
 
