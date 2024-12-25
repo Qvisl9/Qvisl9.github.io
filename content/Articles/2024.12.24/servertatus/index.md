@@ -40,12 +40,6 @@ sudo chmod +x /usr/local/bin/docker-compose
 
 ### 修改配置文件
 
-- 创建工作目录：
-
-```
-mkdir ~/serverstatus && cd ~/serverstatus
-```
-
 - 下载默认配置文件：
 
 ```
