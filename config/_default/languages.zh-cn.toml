@@ -1,7 +1,7 @@
 languageCode = "zh-cn"
 languageName = "简体中文"
 weight = 4
-title = "Don't Lose Hope"
+title = "小熊猫站起来"
 
 [params]
   displayName = "简体中文"
@@ -9,7 +9,7 @@ title = "Don't Lose Hope"
   rtl = false
   dateFormat = "2006-01-02"
   logo = "img/logo.png"
-  copyright = "© { year } <span class='inline-block'> Don't Lose Hope </span> All Rights Reserved</span>."
+  copyright = "© { year } <span class='inline-block'> 扶不起的小熊猫 </span> All Rights Reserved</span>."
 
 [params.author]
   name = "Leeroy Guff"
