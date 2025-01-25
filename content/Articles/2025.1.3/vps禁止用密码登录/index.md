@@ -57,10 +57,12 @@ AuthorizedKeysFile     .ssh/authorized_keys  # 公钥存储位置
 完整版如下：
 
 ```
+#	$OpenBSD: sshd_config,v 1.103 2018/04/09 20:41:22 tj Exp $
+
 # This is the sshd server system-wide configuration file.  See
 # sshd_config(5) for more information.
 
-# This sshd was compiled with PATH=/usr/local/bin:/usr/bin:/bin:/usr/games
+# This sshd was compiled with PATH=/usr/bin:/bin:/usr/sbin:/sbin
 
 # The strategy used for options in the default sshd_config shipped with
 # OpenSSH is to specify options with their default value where
@@ -93,10 +95,11 @@ PermitRootLogin yes
 #MaxAuthTries 6
 #MaxSessions 10
 
-PubkeyAuthentication yes  # 启用公钥认证
+PermitRootLogin prohibit-password
+PubkeyAuthentication yes
 
 # Expect .ssh/authorized_keys2 to be disregarded by default in future.
-AuthorizedKeysFile	.ssh/authorized_keys .ssh/authorized_keys2  # 公钥存储位置
+AuthorizedKeysFile	.ssh/authorized_keys .ssh/authorized_keys2
 
 #AuthorizedPrincipalsFile none
 
@@ -112,16 +115,15 @@ AuthorizedKeysFile	.ssh/authorized_keys .ssh/authorized_keys2  # 公钥存储位
 #IgnoreRhosts yes
 
 # To disable tunneled clear text passwords, change to no here!
-PasswordAuthentication no   # 禁用密码登录
+PasswordAuthentication no
 #PermitEmptyPasswords no
 
 # Change to yes to enable challenge-response passwords (beware issues with
 # some PAM modules and threads)
-KbdInteractiveAuthentication no
+ChallengeResponseAuthentication no
 
 # Kerberos options
-PermitRootLogin prohibit-password   # 禁止root用户通过密码登录
-KerberosAuthentication no
+#KerberosAuthentication no
 #KerberosOrLocalPasswd yes
 #KerberosTicketCleanup yes
 #KerberosGetAFSToken no
@@ -134,13 +136,13 @@ KerberosAuthentication no
 
 # Set this to 'yes' to enable PAM authentication, account processing,
 # and session processing. If this is enabled, PAM authentication will
-# be allowed through the KbdInteractiveAuthentication and
+# be allowed through the ChallengeResponseAuthentication and
 # PasswordAuthentication.  Depending on your PAM configuration,
-# PAM authentication via KbdInteractiveAuthentication may bypass
-# the setting of "PermitRootLogin prohibit-password".
+# PAM authentication via ChallengeResponseAuthentication may bypass
+# the setting of "PermitRootLogin without-password".
 # If you just want the PAM account and session checks to run without
 # PAM authentication, then enable this but set PasswordAuthentication
-# and KbdInteractiveAuthentication to 'no'.
+# and ChallengeResponseAuthentication to 'no'.
 UsePAM yes
 
 #AllowAgentForwarding yes
@@ -158,7 +160,7 @@ PrintMotd no
 #ClientAliveInterval 0
 #ClientAliveCountMax 3
 #UseDNS no
-#PidFile /run/sshd.pid
+#PidFile /var/run/sshd.pid
 #MaxStartups 10:30:100
 #PermitTunnel no
 #ChrootDirectory none

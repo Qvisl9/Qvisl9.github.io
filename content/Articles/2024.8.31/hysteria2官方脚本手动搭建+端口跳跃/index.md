@@ -22,16 +22,18 @@ systemctl enable hysteria-server.service
 
 ## 3、修改/etc/hysteria/config.yaml配置文件
 
+```
 nano /etc/hysteria/config.yaml
+```
 
 清空文件内容，将下列命令粘贴进去保存
 
 ```yaml
-listen: :59346
+listen: :57821
 
 acme:
   domains:
-    - cf解析域名
+    - 解析域名
   email: 邮箱
   
 auth:
@@ -41,7 +43,7 @@ auth:
 masquerade:
   type: proxy
   proxy:
-    url: sni邮箱   #http://xxxx
+    url: https://xxxx/   #https://xxxx/
     rewriteHost: true
 
 ignoreClientBandwidth: false 
