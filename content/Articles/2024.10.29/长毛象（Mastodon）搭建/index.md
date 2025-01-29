@@ -394,3 +394,18 @@ SELECT id, username FROM accounts WHERE username = '用户名';
 docker-compose run --rm web tootctl accounts refresh --all --verbose
 ```
 
+定期清理外站媒体文件
+
+```
+crontab -e   #编辑定时任务
+```
+
+选择1后将以下内容填入并保存：
+
+```
+0 3 * * * /opt/mastodon/tootctl.sh media remove --days=14
+0 3 * * * /opt/mastodon/tootctl.sh media remove-orphans
+0 3 * * * /opt/mastodon/tootctl.sh statuses remove --days=90
+```
+
+定时任务会在每天服务器时间的3点清理缓存 14 天以上的外站媒体文件、“无主”媒体文件、同本站任何用户产生关联的 90 天以上的 toot。
