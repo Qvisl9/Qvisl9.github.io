@@ -56,10 +56,10 @@
 
   const myTimeline = new MastodonTimeline.Init({
     mtContainerId: "mt-container",
-    instanceUrl: "https://y32h.de",
+    instanceUrl: "https://ninenian.de",
     timelineType: "profile",
-    userId: "113686436819877544",
-    profileName: "@Yann",
+    userId: " 113909744016587253",
+    profileName: "@Guff",
     spinnerClass: "mt-loading-spinner",
     defaultTheme: "auto",
     maxNbPostFetch: "40",
@@ -82,7 +82,7 @@
     previewMaxLines: "",
     hideCounterBar: false,
     disableCarousel: false,
-    btnSeeMore: "See more posts at y32h.de",
+    btnSeeMore: "See more posts at ninenian.de",
     btnReload: "Refresh",
     insistSearchContainer: true,
     insistSearchContainerTime: "3000",
@@ -95,14 +95,14 @@
 
     links.forEach(link => {
       const href = link.getAttribute('href');
-      const excludedDomains = ['y32h.de', 'blog.jeoqm-77.top'];
+      const excludedDomains = ['ninenian.de', 'ninenian.com'];
       const domain = new URL(href).hostname;
       if (excludedDomains.includes(domain)) {
         return;
       }
 
       const encodedHref = btoa(encodeURIComponent(href));
-      const newHref = 'https://blog.jeoqm-77.top/go/?target=' + encodedHref;
+      const newHref = 'https://ninenian.com/go/?target=' + encodedHref;
       link.setAttribute('href', newHref);
     });
   });
