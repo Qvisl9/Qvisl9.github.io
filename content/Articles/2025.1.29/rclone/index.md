@@ -185,3 +185,62 @@ rm -rf test
 ```
 
 如果能够顺利执行，则说明挂载没有问题。
+
+##  创建备份脚本
+
+使用您喜欢的文本编辑器创建一个脚本文件，例如 `backup.sh`：
+
+```
+nano /home/backup.sh
+```
+
+**在脚本中添加以下内容**：
+
+```
+#!/bin/bash
+
+# 设置变量
+
+BACKUP_DIR="/home"  # 要备份的目录
+MOUNT_DIR="/GoogleDrive"  # 挂载的 Google Drive 目录
+TIMESTAMP=$(date +%Y%m%d%H%M)  # 时间戳
+BACKUP_FILE="backup-$TIMESTAMP.tar.gz"  # 备份文件名
+
+# 创建压缩备份
+
+tar -czvf "/tmp/$BACKUP_FILE" "$BACKUP_DIR"
+
+# 移动备份到 Google Drive 目录
+
+mv "/tmp/$BACKUP_FILE" "$MOUNT_DIR"
+
+# 删除超过三天的备份
+
+find "$MOUNT_DIR" -name "backup-*.tar.gz" -mtime +3 -exec rm {} \;
+```
+
+**保存并退出**：
+
+按 `CTRL + X`，然后按 `Y` 以保存更改，最后按 `Enter`。
+
+### 赋予脚本执行权限
+
+```
+chmod +x /home/backup.sh
+```
+
+### 设置定时任务
+
+**打开 crontab 编辑器**：
+
+```
+crontab -e
+```
+
+**添加以下行以设置每天 12 点执行备份脚本**：
+
+```
+0 12 * * * /home/backup.sh
+```
+
+按 `CTRL + X`，然后按 `Y` 以保存更改，最后按 `Enter`。
