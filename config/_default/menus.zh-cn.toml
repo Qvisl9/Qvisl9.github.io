@@ -49,6 +49,12 @@
   url = "https://monitor.ninenian.com"
   weight = 51
 
+[[main]]
+  identifier = "mastodon"
+  pre = "mastodon"
+  weight = 300
+  url = "https://ninenian.de/@Guff"
+
 # -- Footer Menu --
 # The footer menu is displayed at the bottom of the page, just before
 # the copyright notice. Configure as per the main menu above.

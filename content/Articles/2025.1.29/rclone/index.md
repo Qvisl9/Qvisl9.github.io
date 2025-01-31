@@ -200,23 +200,20 @@ nano /home/backup.sh
 #!/bin/bash
 
 # 设置变量
-
 BACKUP_DIR="/home"  # 要备份的目录
-MOUNT_DIR="/GoogleDrive"  # 挂载的 Google Drive 目录
+MOUNT_DIR="/GoogleDrive/mastodon"  # 挂载的 Google Drive 目录
 TIMESTAMP=$(date +%Y%m%d%H%M)  # 时间戳
-BACKUP_FILE="backup-$TIMESTAMP.tar.gz"  # 备份文件名
+BACKUP_FILE="backup-$TIMESTAMP.zip"  # 备份文件名
+PASSWORD="your_password"  # 设置解压密码
 
-# 创建压缩备份
-
-tar -czvf "/tmp/$BACKUP_FILE" "$BACKUP_DIR"
+# 创建压缩备份并设置密码
+zip -r -P "$PASSWORD" "/tmp/$BACKUP_FILE" "$BACKUP_DIR"
 
 # 移动备份到 Google Drive 目录
-
 mv "/tmp/$BACKUP_FILE" "$MOUNT_DIR"
 
 # 删除超过三天的备份
-
-find "$MOUNT_DIR" -name "backup-*.tar.gz" -mtime +3 -exec rm {} \;
+find "$MOUNT_DIR" -name "backup-*.zip" -mtime +3 -exec rm {} \;
 ```
 
 **保存并退出**：
@@ -227,6 +224,15 @@ find "$MOUNT_DIR" -name "backup-*.tar.gz" -mtime +3 -exec rm {} \;
 
 ```
 chmod +x /home/backup.sh
+```
+
+### 确保安装 zip 工具
+
+对于 Debian/Ubuntu 系统
+
+```
+sudo apt update
+sudo apt install zip
 ```
 
 ### 设置定时任务
