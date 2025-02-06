@@ -83,7 +83,11 @@ sudo systemctl restart caddy
 wget --no-check-certificate -qO InstallNET.sh 'https://raw.githubusercontent.com/leitbogioro/Tools/master/Linux_reinstall/InstallNET.sh' && chmod a+x InstallNET.sh && bash InstallNET.sh -debian 12 -port '端口' -pwd '密码'
 ```
 
-- 更新系统&软件源
+```
+curl -O https://raw.githubusercontent.com/bin456789/reinstall/main/reinstall.sh || wget -O reinstall.sh $_ && chmod +x ./reinstall.sh && ./reinstall.sh debian 12 --password '密码' --ssh-port '端口'
+```
+
+更新系统&软件源
 
 ```
 apt update && apt install wget git curl vim git sudo -y
