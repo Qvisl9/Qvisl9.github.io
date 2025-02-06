@@ -7,6 +7,7 @@ summary: ""
 tags:
   - 命令
 weight: 1
+lastmod: "2025-02-06"
 ---
 
 {{< lead >}}
@@ -75,7 +76,7 @@ caddy validate --config /etc/caddy/Caddyfile
 sudo systemctl restart caddy
 ```
 
-## linux有关命令
+## DD脚本
 
 - 史上最强dd脚本，自带识别ipv6
 
@@ -87,13 +88,13 @@ wget --no-check-certificate -qO InstallNET.sh 'https://raw.githubusercontent.com
 curl -O https://raw.githubusercontent.com/bin456789/reinstall/main/reinstall.sh || wget -O reinstall.sh $_ && chmod +x ./reinstall.sh && ./reinstall.sh debian 12 --password '密码' --ssh-port '端口'
 ```
 
-更新系统&软件源
+## 更新系统&软件源
 
 ```
 apt update && apt install wget git curl vim git sudo -y
 ```
 
-- 流媒体检测
+## 流媒体检测
 
 ```
 bash <(curl -L -s https://raw.githubusercontent.com/lmc999/RegionRestrictionCheck/main/check.sh)
@@ -103,7 +104,7 @@ bash <(curl -L -s https://raw.githubusercontent.com/lmc999/RegionRestrictionChec
 curl -L https://gitlab.com/spiritysdx/za/-/raw/main/ecs.sh -o ecs.sh && chmod +x ecs.sh && bash ecs.sh
 ```
 
-- 回程检测
+## 回程检测
 
 ```
 bash <(curl -Ls https://raw.githubusercontent.com/sjlleo/nexttrace/main/nt_install.sh)
@@ -113,13 +114,13 @@ bash <(curl -Ls https://raw.githubusercontent.com/sjlleo/nexttrace/main/nt_insta
 nexttrace 本地IP
 ```
 
-- mack-a脚本
+## mack-a脚本
 
 ```
 wget -P /root -N --no-check-certificate "https://raw.githubusercontent.com/mack-a/v2ray-agent/master/install.sh" && chmod 700 /root/install.sh && /root/install.sh
 ```
 
-- bbr开启
+## bbr开启
 
 ```
 echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
@@ -127,13 +128,13 @@ echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
 sysctl -p
 ```
 
-- ipv6优先
+## ipv6优先
 
 ```
 bash <(curl -Lso- https://sh.vps.dance/ip46.sh)
 ```
 
-- 安装rsync
+## 安装rsync
 
 ```
 sudo apt install rsync
