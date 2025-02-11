@@ -204,13 +204,23 @@ BACKUP_DIR="/home"  # 要备份的目录
 MOUNT_DIR="/GoogleDrive/mastodon"  # 挂载的 Google Drive 目录
 TIMESTAMP=$(date +%Y%m%d%H%M)  # 时间戳
 BACKUP_FILE="backup-$TIMESTAMP.zip"  # 备份文件名
-PASSWORD="your_password"  # 设置解压密码
+PASSWORD="密码"  # 设置解压密码
 
 # 创建压缩备份并设置密码
-zip -r -P "$PASSWORD" "/tmp/$BACKUP_FILE" "$BACKUP_DIR"
+if zip -r -P "$PASSWORD" "/tmp/$BACKUP_FILE" "$BACKUP_DIR"; then
+    echo "Backup created: /tmp/$BACKUP_FILE"
+else
+    echo "Failed to create backup"
+    exit 1
+fi
 
 # 移动备份到 Google Drive 目录
-mv "/tmp/$BACKUP_FILE" "$MOUNT_DIR"
+if mv "/tmp/$BACKUP_FILE" "$MOUNT_DIR"; then
+    echo "Backup moved to: $MOUNT_DIR"
+else
+    echo "Failed to move backup"
+    exit 1
+fi
 
 # 删除超过三天的备份
 find "$MOUNT_DIR" -name "backup-*.zip" -mtime +3 -exec rm {} \;

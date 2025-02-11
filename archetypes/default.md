@@ -1,7 +1,7 @@
 ---
 title: "{{ replace .Name "-" " " | title }}"
 date: {{ .Date }}
-author: "Leeroy Guff"
+author: "九年"
 showSummary: true
 summary: ""
 tags:
