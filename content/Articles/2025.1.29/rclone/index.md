@@ -119,7 +119,7 @@ rclone下载地址：https://rclone.org/downloads
 
 ![](https://ab712dd.webp.li/Snipaste_2025-01-29_16-32-25.png)
 
-复制红色方框的内容 粘贴到 cmd
+复制红色方框的内容 粘贴到 cmd，前面要加`.\`
 
 ![](https://ab712dd.webp.li/2022-10-26_14-55-75.png)
 
