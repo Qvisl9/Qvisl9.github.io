@@ -91,7 +91,7 @@ curl -O https://raw.githubusercontent.com/bin456789/reinstall/main/reinstall.sh 
 ## 更新系统&软件源
 
 ```
-apt update && apt install wget git curl vim git sudo -y
+apt update && apt install wget git curl vim sudo -y
 ```
 
 ## 流媒体检测
