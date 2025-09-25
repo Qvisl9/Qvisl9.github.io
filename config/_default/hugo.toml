@@ -9,7 +9,6 @@ defaultContentLanguage = "zh-cn"
 pluralizeListTitles = "true" # hugo function useful for non-english languages, find out more in  https://gohugo.io/getting-started/configuration/#pluralizelisttitles
 
 enableRobotsTXT = true
-paginate = 9
 summaryLength = 0
 hasCJKLanguage = true
 
@@ -19,6 +18,9 @@ buildFuture = false
 enableEmoji = true
 
 googleAnalytics = "G-XRTD46KS56"
+
+[pagination]
+  pagerSize = 10
 
 [imaging]
   anchor = 'Center'

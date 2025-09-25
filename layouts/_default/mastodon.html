@@ -16,7 +16,7 @@
     {{ if not $heroStyle }}{{ $heroStyle = .Site.Params.article.heroStyle }}{{ end }}
     {{ $heroStyle := print "partials/hero/" $heroStyle ".html" }}
     {{ if templates.Exists $heroStyle }}
-      {{ partial $heroStyle . }}
+      {{ partial "hero/background.html" . }}
     {{ else }}
       {{ partial "partials/hero/basic.html" . }}
     {{ end }}
