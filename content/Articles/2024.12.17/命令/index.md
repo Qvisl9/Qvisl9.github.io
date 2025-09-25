@@ -139,8 +139,3 @@ bash <(curl -Lso- https://sh.vps.dance/ip46.sh)
 ```
 sudo apt install rsync
 ```
-
-## 要改变一切
-```
-是的，一切都不要着急
-```
