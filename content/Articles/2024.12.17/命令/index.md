@@ -140,3 +140,8 @@ bash <(curl -Lso- https://sh.vps.dance/ip46.sh)
 sudo apt install rsync
 ```
 
+## 脚本
+```
+这是一个测试代码
+```
+
