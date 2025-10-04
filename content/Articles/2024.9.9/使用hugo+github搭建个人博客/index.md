@@ -142,7 +142,7 @@ git push -u origin main
 
 在仓库的Actions里添加workflow Actions -> New workflow -> 搜索hugo -Configure -> Commit changes
 
-然后等待action完成即可访问[username.github.io](https://lessercat.github.io/)
+然后等待action完成即可访问
 
 **UPDATE:** 此时虽然能访问，但在actions的任务里总有一个pages build and deployment的任务是失败，还失败的莫名其妙
 
