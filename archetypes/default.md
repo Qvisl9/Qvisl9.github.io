@@ -7,11 +7,11 @@ summary: ""
 tags:
   - 示例标签
 series: ["系列名称"]
-series_order: 1
 lastmod: ""
 weight: 1
+draft: true
 ---
 
 {{< lead >}}
-
+在这里写摘要内容。
 {{< /lead >}}
