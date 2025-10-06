@@ -5,13 +5,11 @@ author: "九年"
 showSummary: true
 summary: ""
 tags:
-  - 示例标签
-series: ["系列名称"]
-lastmod: ""
-weight: 1
-draft: true
+  - 放松
+  - 固执
+  - 在乎
 ---
 
 {{< lead >}}
-在这里写摘要内容。
+有时候只要心弦放松半刻，那么下一次就更会来势汹汹！
 {{< /lead >}}
