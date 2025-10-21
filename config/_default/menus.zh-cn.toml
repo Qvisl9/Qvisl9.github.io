@@ -14,7 +14,7 @@
 # ordered by weight from lowest to highest.
 
 [[main]]
-  name = "文章"
+  name = "活着"
   pageRef = "live"
   weight = 10
 
@@ -23,10 +23,6 @@
   pageRef = "thoughts"
   weight = 20
 
-[[main]]
-  name = "碎碎念"
-  pageRef = "mastodon"
-  weight = 30
 
 [[main]]
    name = "关于"
@@ -46,14 +42,8 @@
 [[main]]
   name = "探针"
   parent = "更多"
-  url = "https://monitor.ninenian.com"
+  url = "https://jiankong.ninenian.com"
   weight = 51
-
-[[main]]
-  identifier = "mastodon"
-  pre = "mastodon"
-  weight = 300
-  url = "https://ninenian.de/@Guff"
 
 # -- Footer Menu --
 # The footer menu is displayed at the bottom of the page, just before
