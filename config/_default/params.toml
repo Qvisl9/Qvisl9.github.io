@@ -12,14 +12,14 @@ autoSwitchAppearance = true
 enableSearch = true
 enableCodeCopy = true
 
-mainSections = ["articles"]
+mainSections = ["live"]
 robots = ""
 
 disableImageOptimization = false
 disableTextInHeader = false
 
 defaultBackgroundImage = "img/background.jpeg" # used as default for background images 
-defaultFeaturedImage = "img/featured.jpg" # used as default for featured images in all articles
+defaultFeaturedImage = "img/featured.jpg" # used as default for featured images in all live
 
 highlightCurrentMenuArea = true
 smartTOC = true
@@ -41,7 +41,7 @@ smartTOCHideUnfocusedChildren = false
   showRecent = true
   showRecentItems = 6
   showMoreLink = true
-  showMoreLinkDest = "/articles"
+  showMoreLinkDest = "/live"
   showCards = true
   cardView = true
   cardViewScreenWidth = false

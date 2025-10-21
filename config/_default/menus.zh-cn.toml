@@ -15,7 +15,7 @@
 
 [[main]]
   name = "文章"
-  pageRef = "articles"
+  pageRef = "live"
   weight = 10
 
 [[main]]
