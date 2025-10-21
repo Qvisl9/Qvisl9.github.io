@@ -124,15 +124,6 @@ smartTOCHideUnfocusedChildren = false
   cardView = true
   cardViewScreenWidth = false
 
-[firebase]
-  apiKey = "AIzaSyBPGFb0gwZVUnTCpYYKReWbeCYSiC9J9Bk"
-  authDomain = "lesserkumacat.firebaseapp.com"
-  projectId = "lesserkumacat"
-  storageBucket = "lesserkumacat.appspot.com"
-  messagingSenderId = "25614262596"
-  appId = "1:25614262596:web:df5fb9340acc7d2e75b711"
-  measurementId = "G-49W1QNG7ZT"
-
 [fathomAnalytics]
   # site = "ABC12345"
 # domain = "llama.yoursite.com"
