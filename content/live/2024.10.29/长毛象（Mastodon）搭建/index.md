@@ -101,10 +101,19 @@ sudo ufw allow https
 
 ```
 bash <(curl -L https://get.docker.com/)
-sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+```
+**查看版本**
+```
+docker compose version
+```
+如果能显示版本，就不需要另外安装`docker-compose`二进制。
+
+**docker-compose二进制**
+```
+sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" \
+  -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 ```
-
 ## 拉取Mastodon镜像
 
 ```
@@ -121,6 +130,134 @@ nano docker-compose.yml
 ```
 
 依次找到`web`、`streaming`、`sidekiq`分类，在每一类的`image: ghcr.io/mastodon/mastodon`后添加`:latest`或者你刚才拉取的版本号，变成`image: ghcr.io/mastodon/mastodon:latest`或`image: ghcr.io/mastodon/mastodon:v4.1.4`等等。
+
+`postgres:14`用的是eallion优化版本，加了repack扩展，能更好的清理数据库碎片，提升性能。
+
+[https://github.com/eallion/postgresql-14-alpine-pg-repack](https://github.com/eallion/postgres?ref=www.eallion.com)
+```
+services:
+  db:
+    restart: always
+    # image: postgres:14-alpine
+    image: eallion/postgres:14-alpine
+    shm_size: 256mb
+    networks:
+      - internal_network
+    healthcheck:
+      test: ['CMD', 'pg_isready', '-U', 'postgres']
+    volumes:
+      - ./postgres14:/var/lib/postgresql/data
+    environment:
+      - 'POSTGRES_HOST_AUTH_METHOD=trust'
+
+  redis:
+    restart: always
+    image: redis:7-alpine
+    networks:
+      - internal_network
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+    volumes:
+      - ./redis:/data
+
+  es:
+    restart: always
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.27
+    environment:
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m -Des.enforce.bootstrap.checks=true"
+      - "xpack.license.self_generated.type=basic"
+      - "xpack.security.enabled=false"
+      - "xpack.watcher.enabled=false"
+      - "xpack.graph.enabled=false"
+      - "xpack.ml.enabled=false"
+      - "bootstrap.memory_lock=false"
+      - "cluster.name=es-mastodon"
+      - "discovery.type=single-node"
+      - "thread_pool.write.queue_size=500"
+    networks:
+      - external_network
+      - internal_network
+    healthcheck:
+      test: ["CMD-SHELL", "curl --silent --fail localhost:9200/_cluster/health || exit 1"]
+    volumes:
+      - ./elasticsearch:/usr/share/elasticsearch/data
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    ports:
+      - '127.0.0.1:9200:9200'
+
+  web:
+    image: ghcr.io/mastodon/mastodon:latest
+    restart: always
+    env_file: .env.production
+    command: bundle exec puma -C config/puma.rb
+    networks:
+      - external_network
+      - internal_network
+    healthcheck:
+      # prettier-ignore
+      test: ['CMD-SHELL', 'wget -q --spider --proxy=off localhost:3000/health || exit 1']
+    ports:
+      - '127.0.0.1:3000:3000'
+    depends_on:
+      - db
+      - redis
+      - es
+    volumes:
+      - ./public/system:/mastodon/public/system
+    # 禁止 Watchtower 自动更新
+    labels:
+      - com.centurylinklabs.watchtower.enable=false
+
+  streaming:
+    image: ghcr.io/mastodon/mastodon-streaming:latest
+    restart: always
+    env_file: .env.production
+    command: node ./streaming/index.js
+    networks:
+      - external_network
+      - internal_network
+    healthcheck:
+      # prettier-ignore
+      test: ['CMD-SHELL', "curl -s --noproxy localhost localhost:4000/api/v1/streaming/health | grep -q 'OK' || exit 1"]
+    ports:
+      - '127.0.0.1:4000:4000'
+    depends_on:
+      - db
+      - redis
+    # 禁止 Watchtower 自动更新
+    labels:
+      - com.centurylinklabs.watchtower.enable=false
+
+  sidekiq:
+    image: ghcr.io/mastodon/mastodon:latest
+    restart: always
+    env_file: .env.production
+    command: bundle exec sidekiq
+    depends_on:
+      - db
+      - redis
+    networks:
+      - external_network
+      - internal_network
+    volumes:
+      - ./public/system:/mastodon/public/system
+    healthcheck:
+      test: ['CMD-SHELL', "ps aux | grep '[s]idekiq\ 6' || false"]
+    # 禁止 Watchtower 自动更新
+    labels:
+      - com.centurylinklabs.watchtower.enable=false
+
+networks:
+  external_network:
+  internal_network:
+    internal: true
+```
 
 `ctrl+X`退出保存。
 
