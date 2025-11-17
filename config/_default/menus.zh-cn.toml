@@ -23,6 +23,10 @@
   pageRef = "thoughts"
   weight = 20
 
+[[main]]
+  name = "碎碎念"
+  pageRef = "mastodon"
+  weight = 30
 
 [[main]]
    name = "关于"

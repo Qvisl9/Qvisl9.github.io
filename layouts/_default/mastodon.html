@@ -56,10 +56,10 @@
 
   const myTimeline = new MastodonTimeline.Init({
     mtContainerId: "mt-container",
-    instanceUrl: "https://ninenian.de",
+    instanceUrl: "https://social.ninenian.com",
     timelineType: "profile",
-    userId: " 113909744016587253",
-    profileName: "@Guff",
+    userId: " 115565762047585740",
+    profileName: "@NineNian",
     spinnerClass: "mt-loading-spinner",
     defaultTheme: "auto",
     maxNbPostFetch: "40",
@@ -82,7 +82,7 @@
     previewMaxLines: "",
     hideCounterBar: false,
     disableCarousel: false,
-    btnSeeMore: "See more posts at ninenian.de",
+    btnSeeMore: "See more posts at social.ninenian.com",
     btnReload: "Refresh",
     insistSearchContainer: true,
     insistSearchContainerTime: "3000",
@@ -95,7 +95,7 @@
 
     links.forEach(link => {
       const href = link.getAttribute('href');
-      const excludedDomains = ['ninenian.de', 'ninenian.com'];
+      const excludedDomains = ['ninenian.com'];
       const domain = new URL(href).hostname;
       if (excludedDomains.includes(domain)) {
         return;

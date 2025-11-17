@@ -135,13 +135,13 @@ git submodule add https://github.com/eallion/mastodon-embed-timeline.git assets/
 		// 如果你没有选择 'profile' 作为时间线类型，请留空
         // ID查询
         // cd /home/mastodon/mastodon/
-        // docker exec -it mastodon_db_1 psql -U mastodon -d mastodon
+        // docker exec -it mastodon-db-1 psql -U mastodon -d mastodon
         // SELECT id, username FROM accounts WHERE username = '用户名';
-		userId: "107666",
+		userId: "115565762047585740",
 
 		// 你在 Mastodon 实例上的用户名（包括开头的 @ 符号）
 		// 如果你没有选择 'profile' 作为时间线类型，请留空
-		profileName: "@eallion",
+		profileName: "@NineNian",
 
 		// 标签的名称（不包括 # 符号）
 		// 如果你没有选择 'hashtag' 作为时间线类型，请留空
@@ -245,7 +245,7 @@ git submodule add https://github.com/eallion/mastodon-embed-timeline.git assets/
 
 		// 自定义指向 Mastodon 页面的按钮文本，放置在时间线末尾
 		// 留空以隐藏
-		btnSeeMore: "在 e5n.cc 查看更多帖子",
+		btnSeeMore: "在 social.ninenian.com 查看更多帖子",
 
 		// 自定义重新加载帖子列表的按钮文本，放置在时间线末尾
 		// 留空以隐藏
