@@ -61,49 +61,70 @@ services:
     container_name: vaultwarden
     restart: always
     environment:
-      - SIGNUPS_ALLOWED=false  # 关闭注册功能
-      - DOMAIN=https://yourdomain.com  # 替换为你的域名
+      - SIGNUPS_ALLOWED=false   #关闭注册
+      - DOMAIN=自定义域名
+      - WEB_VAULT_ENABLED=false   #关闭WEB服务
     volumes:
       - ./data:/data
     ports:
-      - "127.0.0.1:8000:80"  # 仅本地访问
+      - "127.0.0.1:8000:80"
 
-  caddy:
-    image: caddy:latest
-    container_name: caddy
+  watchtower:
+    container_name: watchtower
+    image: containrrr/watchtower
     restart: always
-    ports:
-      - "80:80"
-      - "443:443"
     volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile
-      - ./caddy_data:/data
-      - ./caddy_config:/config
-    depends_on:
-      - vaultwarden
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --cleanup --interval 86400
 ```
 
 `SIGNUPS_ALLOWED=false`先开启即`true`，注册好账号后再false
 
-## 配置Caddyfile
+## caddy反代
 
-# 创建Caddyfile
+#### 安装caddy
 ```
-# 创建Caddyfile
-nano Caddyfile
+sudo apt install -y debian-keyring debian-archive-keyring apt-transport-https
+curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo tee /etc/apt/trusted.gpg.d/caddy.asc
+curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo tee /etc/apt/sources.list.d/caddy-stable.list
+sudo apt update
+sudo apt install caddy
 ```
 
-在`Caddyfile`中添加以下内容：
+验证安装
 
 ```
-yourdomain.com {
-    reverse_proxy vaultwarden:80
+caddy version
+```
+#### 编缉caddyfile
+
+Caddy 的默认配置文件路径为 /etc/caddy/Caddyfile（Linux）或 Caddyfile（当前目录）
+```
+nano /etc/caddy/Caddyfile
+```
+创建或编辑该文件，例如：
+```
+example.com {
+    reverse_proxy 127.0.0.1:8080
 }
+
+another-example.com {
+    reverse_proxy 192.168.1.100:9000
+}
+
+```
+运行以下命令检查配置是否正确:
+```
+caddy validate --config /etc/caddy/Caddyfile
 ```
 
-##  启动服务
+启动或重启 Caddy
+```
+sudo systemctl restart caddy
+```
+
+## 启动Docker Compose
 
 ```
-# 启动Docker Compose
 sudo docker-compose up -d
 ```
