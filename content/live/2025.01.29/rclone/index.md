@@ -199,14 +199,12 @@ nano /home/backup.sh
 ```
 #!/bin/bash
 
-# 设置变量
-BACKUP_DIR="/home"  # 要备份的目录
-MOUNT_DIR="/GoogleDrive/mastodon"  # 挂载的 Google Drive 目录
-TIMESTAMP=$(date +%Y%m%d%H%M)  # 时间戳
-BACKUP_FILE="backup-$TIMESTAMP.zip"  # 备份文件名
-PASSWORD="密码"  # 设置解压密码
+BACKUP_DIR="/vaultwarden"
+TIMESTAMP=$(date +%Y%m%d%H%M)
+BACKUP_FILE="backup-$TIMESTAMP.zip"
+PASSWORD="xxxx"
 
-# 创建压缩备份并设置密码
+# 创建 zip 压缩包（带密码）
 if zip -r -P "$PASSWORD" "/tmp/$BACKUP_FILE" "$BACKUP_DIR"; then
     echo "Backup created: /tmp/$BACKUP_FILE"
 else
@@ -214,16 +212,20 @@ else
     exit 1
 fi
 
-# 移动备份到 Google Drive 目录
-if mv "/tmp/$BACKUP_FILE" "$MOUNT_DIR"; then
-    echo "Backup moved to: $MOUNT_DIR"
+# 上传到 Google Drive（使用真正的 remote 名：GoogleDrive）
+if rclone copy "/tmp/$BACKUP_FILE" "GoogleDrive:vaultwarden"; then
+    echo "Uploaded to Google Drive"
 else
-    echo "Failed to move backup"
+    echo "Upload failed"
     exit 1
 fi
 
-# 删除超过三天的备份
-find "$MOUNT_DIR" -name "backup-*.zip" -mtime +3 -exec rm {} \;
+# 删除本地 zip
+rm "/tmp/$BACKUP_FILE"
+
+# 删除云端超过 3 天的备份
+rclone delete "GoogleDrive:vaultwarden" --min-age 3d --include "backup-*.zip"
+
 ```
 
 **保存并退出**：
