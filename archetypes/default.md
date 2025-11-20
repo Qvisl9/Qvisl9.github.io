@@ -6,10 +6,10 @@ showSummary: true
 summary: ""
 tags:
   - 示例标签
-series: ["系列名称"]
 lastmod: ""
-weight: 1
 draft: true
+series: ["系列名称"]
+weight: 1
 ---
 
 {{< lead >}}
