@@ -43,7 +43,7 @@ auth:
 masquerade:
   type: proxy
   proxy:
-    url: https://www.bing.com/   # ← 超稳定，不会触发验证
+    url: https://www.apple.com/   # ← 超稳定，不会触发验证
     rewriteHost: false           # ← 强烈建议 false，避免 CF bot 检测
 
 ignoreClientBandwidth: false
