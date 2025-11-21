@@ -29,7 +29,7 @@ nano /etc/hysteria/config.yaml
 清空文件内容，将下列命令粘贴进去保存
 
 ```yaml
-listen: :57821
+listen: :端口
 
 acme:
   domains:
