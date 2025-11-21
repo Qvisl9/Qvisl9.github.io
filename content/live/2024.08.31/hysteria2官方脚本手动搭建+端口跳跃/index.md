@@ -33,28 +33,28 @@ listen: :57821
 
 acme:
   domains:
-    - 解析域名
-  email: 邮箱
-  
+    - your.domain.com     # ← 换成你的真实解析域名
+  email: you@example.com   # ← 换成你的邮箱
+
 auth:
   type: password
-  password: 密码
+  password: "你的密码"       # ← 自己设置
 
 masquerade:
   type: proxy
   proxy:
-    url: https://xxxx/   #https://xxxx/
-    rewriteHost: true
+    url: https://www.bing.com/   # ← 超稳定，不会触发验证
+    rewriteHost: false           # ← 强烈建议 false，避免 CF bot 检测
 
-ignoreClientBandwidth: false 
+ignoreClientBandwidth: false
 
 quic:
-  initStreamReceiveWindow: 8388608 
-  maxStreamReceiveWindow: 8388608 
-  initConnReceiveWindow: 20971520 
-  maxConnReceiveWindow: 20971520 
-  maxIdleTimeout: 30s 
-  maxIncomingStreams: 1024 
+  initStreamReceiveWindow: 8388608
+  maxStreamReceiveWindow: 8388608
+  initConnReceiveWindow: 20971520
+  maxConnReceiveWindow: 20971520
+  maxIdleTimeout: 30s
+  maxIncomingStreams: 1024
   disablePathMTUDiscovery: false
 
 bandwidth:
@@ -62,10 +62,11 @@ bandwidth:
   down: 1 gbps
 
 outbounds:
-  - name: hoho
+  - name: direct
     type: direct
     direct:
-      mode: auto   #64:ipv6优先
+      mode: 46    # auto，46-IPV4，64——IPV6
+
 ```
 
 ## 4、设置端口跳跃
