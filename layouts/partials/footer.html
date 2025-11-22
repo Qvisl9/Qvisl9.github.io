@@ -1,0 +1,128 @@
+<footer id="site-footer" class="py-10 print:hidden">
+  {{/* Footer menu */}}
+  {{ if .Site.Params.footer.showMenu | default true }}
+    {{ if .Site.Menus.footer }}
+      {{ $onlyIcon := true }}
+      {{ range .Site.Menus.footer }}
+        {{ if .Name }}
+          {{ $onlyIcon = false }}
+          {{ break }}
+        {{ end }}
+      {{ end }}
+      {{ $navClass := printf "flex flex-row pb-4 text-base font-medium text-neutral-500 dark:text-neutral-400 %s" (cond $onlyIcon "overflow-x-auto py-2" "") }}
+      {{ $ulClass := printf "flex list-none %s" (cond $onlyIcon "flex-row" "flex-col sm:flex-row") }}
+      {{ $liClass := printf "flex mb-1 text-end sm:mb-0 sm:me-7 sm:last:me-0 %s" (cond $onlyIcon "ltr:mr-4 rtl:ml-4" "") }}
+      <nav class="{{ $navClass }}">
+        <ul class="{{ $ulClass }}">
+          {{ range .Site.Menus.footer }}
+            <li class="{{ $liClass }}">
+              <a
+                class="decoration-primary-500 hover:underline hover:decoration-2 hover:underline-offset-2 flex items-center"
+                href="{{ .URL }}"
+                title="{{ .Title }}">
+                {{ if .Pre }}
+                  <span {{ if and .Pre .Name }}class="mr-1"{{ end }}>
+                    {{ partial "icon.html" .Pre }}
+                  </span>
+                {{ end }}
+                {{ .Name | markdownify }}
+              </a>
+            </li>
+          {{ end }}
+        </ul>
+      </nav>
+    {{ end }}
+  {{ end }}
+
+  <div class="flex items-center justify-between">
+    {{/* Copyright */}}
+    {{ if .Site.Params.footer.showCopyright | default true }}
+      <p class="text-sm text-neutral-500 dark:text-neutral-400">
+        {{- with replace .Site.Params.copyright "{ year }" now.Year }}
+          {{ . | markdownify }}
+        {{- else }}
+          &copy; {{ now.Format "2006" }} {{ .Site.Params.Author.name | markdownify }}
+        {{- end }}
+      </p>
+    {{ end }}
+
+    {{/* Theme attribution */}}
+    {{ if .Site.Params.footer.showThemeAttribution | default true }}
+      <p class="text-xs text-neutral-500 dark:text-neutral-400">
+        {{ $hugo := printf `<a class="hover:underline hover:decoration-primary-400 hover:text-primary-500"
+          href="https://gohugo.io/" target="_blank" rel="noopener noreferrer">Hugo</a>` }}
+        {{ $blowfish := printf `<a class="hover:underline hover:decoration-primary-400 hover:text-primary-500"
+          href="https://blowfish.page/" target="_blank" rel="noopener noreferrer">Blowfish</a>` }}
+        {{ i18n "footer.powered_by" (dict "Hugo" $hugo "Theme" $blowfish) | safeHTML }}
+      </p>
+    {{ end }}
+  </div>
+
+  {{ if not .Site.Params.disableImageZoom | default true }}
+    <script>
+      mediumZoom(document.querySelectorAll("img:not(.nozoom)"), {
+        margin: 24,
+        background: "rgba(0,0,0,0.5)",
+        scrollOffset: 0,
+      });
+    </script>
+  {{ end }}
+
+  {{ $jsProcess := resources.Get "js/process.js" }}
+  {{ $jsProcess = $jsProcess | resources.Minify | resources.Fingerprint (.Site.Params.fingerprintAlgorithm | default "sha512") }}
+  <script
+    type="text/javascript"
+    src="{{ $jsProcess.RelPermalink }}"
+    integrity="{{ $jsProcess.Data.Integrity }}">
+  </script>
+
+  {{ if templates.Exists "partials/extend-footer.html" }}
+    {{ partialCached "extend-footer.html" . }}
+  {{ end }}
+
+  <!-- PrismJS 核心 + Toolbar + Copy 插件 -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/toolbar/prism-toolbar.min.css"
+    rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+
+  <!-- 删除主题自带复制按钮 & 初始化 Prism copy -->
+  <script>
+    function initPrismCopy() {
+      // 删除主题自带中文复制按钮
+      document.querySelectorAll('button.copy-button').forEach(btn => btn.remove());
+
+      // 注册 Prism 自定义按钮
+      Prism.plugins.toolbar.registerButton('copy-to-clipboard', function(env) {
+        const btn = document.createElement('button');
+        const lang = '{{ .Site.Language.Lang }}';
+        btn.textContent = lang === 'zh-cn' ? '复制' : 'copy';
+
+        btn.addEventListener('click', function() {
+          navigator.clipboard.writeText(env.code).then(() => {
+            btn.textContent = lang === 'zh-cn' ? '已复制!' : 'Copied!';
+            setTimeout(() => {
+              btn.textContent = lang === 'zh-cn' ? '复制' : 'copy';
+            }, 2000);
+          }).catch(() => {
+            const t = document.createElement('textarea');
+            t.value = env.code;
+            document.body.appendChild(t);
+            t.select();
+            document.execCommand('copy');
+            document.body.removeChild(t);
+          });
+        });
+
+        return btn;
+      });
+    }
+
+    // 等待 DOM 和主题按钮生成后再初始化
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(initPrismCopy, 100);
+    });
+  </script>
+</footer>
