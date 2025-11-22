@@ -19,6 +19,9 @@ enableEmoji = true
 
 googleAnalytics = "G-XRTD46KS56"
 
+[params]
+  customJS = ["js/custom.js"]
+
 [pagination]
   pagerSize = 10
 
