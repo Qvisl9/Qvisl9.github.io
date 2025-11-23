@@ -1,20 +1,20 @@
 languageCode = "zh-cn"
 languageName = "简体中文"
 weight = 4
-title = "九年"
+title = "A-Do's Blog"
 
 [params]
   displayName = "简体中文"
   isoCode = "zh-cn"
   rtl = false
   dateFormat = "2006-01-02"
-  logo = "img/logo.png"
+#  logo = "img/logo.png"
   copyright = "© { year } <span class='inline-block'>九年</span> All Rights Reserved</span>."
 
 [params.author]
-  name = "九年"
+  name = "阿斗"
   image = "img/bear-cat-logo.png"
-  headline = "真的猛兽，以站立的姿态走行世间"
+  headline = "胸无大志也是一种智慧"
   bio = "真的就这么晚，急不来"
   links = [
     { envelope = "mailto:milkyway7847@gmail.com" },

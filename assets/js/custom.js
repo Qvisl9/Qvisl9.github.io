@@ -1,8 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // 删除主题自带的 copy 按钮
-  document.querySelectorAll('button.copy-button').forEach(btn => btn.remove());
+  // 延迟 100ms 删除主题按钮，确保它已生成
+  setTimeout(() => {
+    document.querySelectorAll('button.copy-button').forEach(btn => btn.remove());
+  }, 100);
 
-  // 初始化 Prism Copy 插件
+  // 初始化 Prism Copy 按钮
   Prism.plugins.toolbar.registerButton('copy-to-clipboard', function(env) {
     const btn = document.createElement('button');
     const lang = '{{ .Site.Language.Lang }}';
@@ -14,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
           btn.textContent = lang === 'zh-cn' ? '复制' : 'copy';
         }, 2000);
       }).catch(() => {
-        // Fallback
         const t = document.createElement('textarea');
         t.value = env.code;
         document.body.appendChild(t);
