@@ -139,4 +139,3 @@ bash <(curl -Lso- https://sh.vps.dance/ip46.sh)
 ```text
 sudo apt install rsync
 ```
-
