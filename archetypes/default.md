@@ -1,13 +1,13 @@
 ---
 title: "{{ replace .Name "-" " " | title }}"
 date: {{ .Date }}
-author: "阿斗"
+author: "燎原斗"
 showSummary: true
 summary: ""
 tags:
   - 示例标签
 lastmod: ""
-draft: true
+draft: false
 series: ["系列名称"]
 weight: 1
 ---
